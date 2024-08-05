@@ -1,0 +1,87 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #5fca86;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
+}
+
+.bird-section, .human-section, .flower-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.bird {
+    width: 100px; 
+    margin-bottom: 10px;
+}
+
+.flower {
+    width: 100px; 
+}
+
+.speak-bubble {
+    background-color: #ffd21d;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px 0;
+    width: 300px;
+    position: relative;
+}
+
+.speak-bubble::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ffd21d;
+}
+
+.human-section .speak-bubble {
+    background-color: #c997e1;
+    align-self: flex-end;
+}
+
+.human-section .speak-bubble::after {
+    left: auto;
+    right: -10px;
+    border-color: #c997e1;
+}
+
+.change-dialect {
+    color: #2e8c50;
+    text-decoration: underline;
+    cursor: pointer;
+    margin: 5px 0;
+}
+
+.database-link {
+    color: #2e8c50;
+    text-decoration: underline;
+    margin-bottom: 10px;
+}
+
+.human-tounge {
+    color: #9b59b6;
+    margin-bottom: 10px;
+}
