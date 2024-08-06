@@ -1,135 +1,55 @@
-let userInput;
-let humanBubbles = [];
-let birdBubbles = [];
-let selectedBird = 1;
-let birdSounds = {
-    1: ["bird1-sound1.mp3", "bird1-sound2.mp3", "bird1-sound3.mp3", "bird1-sound4.mp3"],
-    2: ["bird2-sound1.mp3", "bird2-sound2.mp3", "bird2-sound3.mp3", "bird2-sound4.mp3"],
-    3: ["bird3-sound1.mp3", "bird3-sound2.mp3", "bird3-sound3.mp3", "bird3-sound4.mp3"]
-};
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bird Speak</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <h1>What kind of bird speak do you mean?</h1>
 
-function setup() {
-    let canvas = createCanvas(800, 600);
-    canvas.parent('p5-container');
-    background('#5fca86'); 
+    <div class="container">
+        <div class="bird-section">
+            <img id="bird-image" src="bird1.png" alt="Bird" class="bird">
+            <p class="bird-speak">BIRD SPEAK</p>
+            <p id="change-dialect" class="change-dialect">Change Dialect</p>
+            <a href="https://xeno-canto.org/" class="database-link" target="_blank">Link to the Database</a>
 
-    userInput = select('#user-input');
-    userInput.input(handleInput);
+            <div class="speak-bubble" onclick="playSound('birdsampleA.mp3')">
+                Bubble 1
+                <a href="javascript:void(0);" class="sound-link" aria-label="Play Sound"></a>
+            </div>
+            <div class="speak-bubble" onclick="playSound('birdsampleB.mp3')">
+                Bubble 2
+                <a href="javascript:void(0);" class="sound-link" aria-label="Play Sound"></a>
+            </div>
+            <div class="speak-bubble" onclick="playSound('birdsampleC.mp3')">
+                Bubble 3
+                <a href="javascript:void(0);" class="sound-link" aria-label="Play Sound"></a>
+            </div>
+        </div>
 
-    let changeDialectButton = select('#change-dialect');
-    changeDialectButton.mousePressed(changeDialect);
-}
+        <div class="human-section">
+            <p class="human-tounge">HUMAN TOUNGE</p>
+            <div id="p5-container"></div>
+            <input type="text" id="user-input" placeholder="Type here...">
+        </div>
 
-function draw() {
-    background('#5fca86');
+        <div class="flower-section">
+            <img src="flower.png" alt="Flower" class="flower">
+        </div>
+    </div>
 
-    for (let i = 0; i < humanBubbles.length; i++) {
-        humanBubbles[i].move();
-        humanBubbles[i].display();
-    }
-
-    for (let i = 0; i < birdBubbles.length; i++) {
-        birdBubbles[i].move();
-        birdBubbles[i].display();
-    }
-
-    // Remove extra bubbles
-    if (humanBubbles.length > 10) {
-        humanBubbles.shift().remove();
-    }
-    if (birdBubbles.length > 10) {
-        birdBubbles.shift().remove();
-    }
-}
-
-function handleInput() {
-    if (key === ' ') {
-        createHumanBubble();
-    }
-}
-
-function createHumanBubble() {
-    let text = userInput.value().trim();
-    if (text.length === 0) return;
-
-    let newHumanBubble = new Bubble(width - 200, height - 50, text, 'human');
-    humanBubbles.push(newHumanBubble);
-
-    let soundIndex = getSoundIndex(text.length);
-    let birdSound = birdSounds[selectedBird][soundIndex];
-    let newBirdBubble = new Bubble(200, height - 50, "Bird Sound", 'bird', birdSound);
-    birdBubbles.push(newBirdBubble);
-
-    userInput.value('');
-}
-
-function getSoundIndex(textLength) {
-    if (textLength <= 4) {
-        return 0;
-    } else if (textLength <= 8) {
-        return 1;
-    } else if (textLength <= 12) {
-        return 2;
-    } else {
-        return 3;
-    }
-}
-
-function changeDialect() {
-    selectedBird = Math.floor(Math.random() * 3) + 1;
-    let birdImage = select('#bird-image');
-    birdImage.elt.src = `bird${selectedBird}.png`; // Update image source
-
-    // Optional: Clear existing bird bubbles and recreate them with new sounds
-    birdBubbles.forEach(bubble => bubble.remove());
-    birdBubbles = []; // Reset bird bubbles
-}
-
-class Bubble {
-    constructor(x, y, text, type, sound = null) {
-        this.x = x;
-        this.y = y;
-        this.text = text;
-        this.type = type;
-        this.sound = sound;
-        this.button = null;
-    }
-
-    move() {
-        this.y -= 1; 
-    }
-
-    display() {
-        fill(this.type === 'human' ? '#c997e1' : '#ffd21d');
-        stroke(0);
-        rect(this.x - 150, this.y - 25, 300, 50, 20); 
-        fill(0);
-        noStroke();
-        textAlign(CENTER, CENTER);
-        text(this.text, this.x, this.y);
-
-        if (this.sound && !this.button) {
-            this.button = createButton('');
-            this.button.position(this.x + 120, this.y - 10);
-            this.button.style('background', 'url("assets/sound-icon.png") no-repeat center center');
-            this.button.size(20, 20);
-            this.button.mousePressed(() => this.playSound());
+    <script>
+        function playSound(file) {
+            let audio = new Audio(file);
+            audio.play();
         }
+    </script>
 
-        if (this.y < 0 && this.button) {
-            this.button.remove();
-            this.button = null;
-        }
-    }
 
-    playSound() {
-        let sound = new Audio(this.sound);
-        sound.play();
-    }
-
-    remove() {
-        if (this.button) {
-            this.button.remove();
-        }
-    }
-}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
