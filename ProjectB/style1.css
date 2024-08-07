@@ -1,67 +1,92 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
+    background-color: #5fca86;
+    color: #333;
     margin: 0;
-    padding: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
-    margin-top: 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 .container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 50px;
+    width: 100%;
+    max-width: 1200px;
+    justify-content: space-between;
 }
 
 .bird-section, .human-section, .flower-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 30%;
-    text-align: center;
 }
 
-.bird-section img, .flower-section img {
-    width: 100px;
-    height: auto;
+.bird {
+    width: 100px; 
+    margin-bottom: 10px;
+}
+
+.flower {
+    width: 100px; 
 }
 
 .speak-bubble {
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    padding: 10px;
+    background-color: #ffd21d;
+    border-radius: 20px;
+    padding: 20px;
     margin: 10px 0;
+    width: 300px;
+    position: relative;
+}
+
+.speak-bubble::after {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #ffd21d;
+}
+
+.human-section .speak-bubble {
+    background-color: #c997e1;
+    align-self: flex-end;
+}
+
+.human-section .speak-bubble::after {
+    left: auto;
+    right: -10px;
+    border-color: #c997e1;
+}
+
+.change-dialect {
+    color: #2e8c50;
+    text-decoration: underline;
     cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.bubble-up {
-    animation: bubbleUp 1s ease forwards;
-}
-
-@keyframes bubbleUp {
-    0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0); }
-}
-
-.bird-speak, .human-tounge, .change-dialect {
-    font-weight: bold;
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 .database-link {
-    display: block;
-    margin-top: 10px;
-    text-decoration: none;
-    color: blue;
+    color: #2e8c50;
+    text-decoration: underline;
+    margin-bottom: 10px;
 }
 
-#user-input {
-    width: 80%;
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-top: 10px;
+.human-tounge {
+    color: #9b59b6;
+    margin-bottom: 10px;
+}
+
+#p5-container {
+    width: 100%;
+    height: 400px; /* Adjust as needed */
 }
