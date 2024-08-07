@@ -31,7 +31,7 @@
         </div>
 
         <div class="human-section">
-            <p class="human-tounge">HUMAN TONGUE</p>
+            <p class="human-tounge">HUMAN TOUNGE</p>
             <div id="p5-container"></div>
             <input type="text" id="user-input" placeholder="Type here...">
         </div>
@@ -46,15 +46,10 @@
             let audio = new Audio(file);
             audio.play();
         }
-
-        document.querySelectorAll('.speak-bubble').forEach(bubble => {
-            bubble.addEventListener('click', () => {
-                bubble.classList.add('bubble-up');
-                setTimeout(() => {
-                    bubble.classList.remove('bubble-up');
-                }, 1000);
-            });
-        });
     </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="sketch.js"></script>
 </body>
 </html>
